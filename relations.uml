@@ -1,0 +1,123 @@
+@startuml
+
+
+enum Sexo {
+  Masculino
+  Feminino
+  Outro
+}
+
+enum EstadoCivil {
+  Solteiro
+  Casado
+  Divorciado
+  Viuvo
+  Separado
+}
+
+
+
+class Paciente {
+  + Id: Guid
+  + NomeCompleto: string
+  + CPF: string
+  + DataNascimento: DateTime
+  + TipoSanguineo: string
+  + Telefone: string
+  + Email: string
+  + EnderecoCompleto: string
+  + NumeroCartaoSUS: string
+  + PossuiPlanoSaude: bool
+  + EstadoCivil: EstadoCivil
+  + Sexo: Sexo
+}
+
+class ProfissionalDeSaude {
+  + Id: Guid
+  + NomeCompleto: string
+  + CPF: string
+  + Email: string
+  + Telefone: string
+  + RegistroConselho: string
+  + TipoRegistro: string
+  + DataAdmissao: DateTime
+  + CargaHorariaSemanal: int
+  + Turno: string
+  + Ativo: bool
+}
+
+class Especialidade {
+  + Nome: string
+}
+
+class Prontuario {
+  + Id: Guid
+  + NumeroDoProntuario: int
+  + DataDeAbertura: DateTime
+  + ObservacoesDerais: string
+}
+
+class Atendimento {
+  + Id: Guid
+  + DataEHora: DateTime
+  + Tipo: string
+  + Status: string
+  + Local: string
+}
+
+class Exame {
+  + Id: Guid
+  + Tipo: string
+  + DataDeSolicitacao: DateTime
+  + DataDeRealizacao: DateTime
+  + Resultado: string
+}
+
+class Prescricao {
+  + Id: Guid
+  + Medicamento: string
+  + Dosagem: string
+  + Frequencia: string
+  + ViaAdministracao: string
+  + DataInicio: DateTime
+  + DataFim: DateTime?
+  + Observacoes: string
+  + StatusPrescricao: string
+  + ReacoesAdversas: string?
+}
+
+class Internacao {
+  + Id: Guid
+  + PacienteId: Guid
+  + AtendimentoId: Guid
+  + DataEntrada: DateTime
+  + PrevisaoAlta: DateTime?
+  + MotivoInternacao: string
+  + Leito: string
+  + Quarto: string
+  + Setor: string
+  + PlanoSaudeUtilizado: string?
+  + ObservacoesClinicas: string
+  + StatusInternacao: string
+}
+
+class AltaHospitalar {
+  + Data: DateTime
+  + CondicaoDoPaciente: string
+  + InstrucoesPosAlta: string
+}
+
+' Definição de relacionamentos entre as classes
+
+Paciente "1" *-- "N" Prontuario 
+Prontuario "1" --* "N" Atendimento 
+ProfissionalDeSaude "1" -- "N" Atendimento
+Atendimento "1" -- "N" Prescricao
+Atendimento "1" -- "N" Exame 
+Atendimento "0..1" -- "1" Internacao 
+Internacao "0..1" -- "1" AltaHospitalar 
+ProfissionalDeSaude "N" -- "1" Especialidade 
+Sexo "1" <-- "*" Paciente
+EstadoCivil "1" <-- "*" Paciente
+
+@enduml
