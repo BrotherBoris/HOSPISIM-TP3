@@ -17,6 +17,8 @@ namespace HOSPISIM.Data
         public DbSet<HOSPISIM.Models.Atendimento> Atendimento { get; set; } = default!;
         public DbSet<HOSPISIM.Models.Prontuario> Prontuario { get; set; } = default!;
         public DbSet<HOSPISIM.Models.Exame> Exame { get; set; } = default!;
+        public DbSet<Prescricao> Prescricoes { get; set; } = default!;
+        public DbSet<Internacao> Internacoes { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

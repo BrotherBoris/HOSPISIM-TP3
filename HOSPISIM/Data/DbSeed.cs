@@ -7,9 +7,12 @@ namespace HOSPISIM.Data
     {
         public static void Initialize(HospismDbContext context)
         {
+            
             context.Database.EnsureCreated();
             context.Database.Migrate();
 
+            context.Internacoes.RemoveRange(context.Internacoes);
+            context.Prescricoes.RemoveRange(context.Prescricoes);
             context.Exame.RemoveRange(context.Exame);
             context.Prontuario.RemoveRange(context.Prontuario);
             context.Atendimento.RemoveRange(context.Atendimento);
@@ -503,8 +506,104 @@ namespace HOSPISIM.Data
                 context.SaveChanges();
             }
 
+            // SEED: Prescricoes
+            if (!context.Prescricoes.Any())
+            {
+                var atendimentos = context.Atendimento.ToList();
+                var profissionais = context.ProfissionaisDeSaude.ToList();
 
+                var medicamentos = new[] { "Dipirona", "Amoxicilina", "Paracetamol", "Ibuprofeno", "Losartana", "Furosemida", "Omeprazol", "Loratadina", "Metformina", "AAS" };
+                var dosagens = new[] { "500mg", "250mg", "200mg", "50mg", "20mg", "10mg", "100mg", "5mg", "400mg", "10mg/mL" };
+                var frequencias = new[] { "A cada 8 horas", "A cada 12 horas", "Uma vez ao dia", "2 vezes ao dia", "3 vezes ao dia", "A cada 24 horas" };
+                var viasAdministracao = new[] { "Oral", "Intravenosa", "Intramuscular", "Tópica", "Subcutânea" };
+                var statusPrescricao = new[] { "Ativa", "Suspensa", "Encerrada" };
+                var reacoesAdversas = new[] { "Náusea", "Tontura", "Dor abdominal", "Reação alérgica", "Efeito colateral não identificado", "Dores articulares" };
 
+                var prescricoes = new List<Prescricao>();
+                var rand = new Random();
+
+                for (int i = 0; i < 10; i++)
+                {
+                    var atendimento = atendimentos[i];
+                    var profissional = profissionais[i];
+
+                    prescricoes.Add(new Prescricao
+                    {
+                        Id = Guid.NewGuid(),
+                        Medicamento = medicamentos[rand.Next(medicamentos.Length)], 
+                        Dosagem = dosagens[rand.Next(dosagens.Length)], 
+                        Frequencia = frequencias[rand.Next(frequencias.Length)], 
+                        ViaAdministracao = viasAdministracao[rand.Next(viasAdministracao.Length)], 
+                        DataInicio = DateTime.Now.AddDays(-rand.Next(1, 30)), 
+                        DataFim = DateTime.Now.AddDays(rand.Next(1, 15)), 
+                        Observacoes = "Tomar com alimentos. " + (rand.Next(2) == 0 ? "Recomenda-se repouso." : "Evitar exposição ao sol."),
+                        StatusPrescricao = statusPrescricao[rand.Next(statusPrescricao.Length)],
+                        ReacoesAdversas = rand.Next(2) == 0 ? null : reacoesAdversas[rand.Next(reacoesAdversas.Length)],
+                        AtendimentoId = atendimento.Id, 
+                        ProfissionalId = profissional.Id
+                    });
+                }
+
+                context.Prescricoes.AddRange(prescricoes);
+                context.SaveChanges();
+            }
+
+            // SEED: Internacoes
+            if (!context.Internacoes.Any())
+            {
+                var pacientes = context.Pacientes.ToList();
+                var atendimentos = context.Atendimento.ToList();
+
+                var motivosInternacao = new[] {
+                    "Cirurgia programada",
+                    "Acidente",
+                    "Infecção respiratória",
+                    "Fratura óssea",
+                    "Exame especializado",
+                    "Desidratação grave",
+                    "Tratamento de câncer",
+                    "Descompensação cardíaca",
+                    "Pneumonia",
+                    "Acidente vascular cerebral (AVC)"
+                 };
+
+                var leitos = new[] { "Leito 1", "Leito 2", "Leito 3", "Leito 4", "Leito 5" };
+                var quartos = new[] { "Quarto 101", "Quarto 102", "Quarto 103", "Quarto 104", "Quarto 105" };
+                var setores = new[] { "Clínica Médica", "Cardiologia", "Pediatria", "Ortopedia", "Neurologia", "Oncologia" };
+                var planosSaude = new[] { "Unimed", "Amil", "Bradesco Saúde", "Cassi", "Itaú Saúde", "NotreDame Intermédica", "Saúde Caixa" };
+                var statusInternacao = new[] { "Ativa", "Alta concedida", "Transferido", "Óbito" };
+
+                var internacoes = new List<Internacao>();
+                var rand = new Random();
+
+                for (int i = 0; i < 10; i++)
+                {
+                    var paciente = pacientes[rand.Next(pacientes.Count)];
+                    var atendimento = atendimentos[rand.Next(atendimentos.Count)];
+
+                    var dataEntrada = DateTime.Now.AddDays(-rand.Next(1, 15));  
+                    var previsaoAlta = dataEntrada.AddDays(rand.Next(2, 15)); 
+
+                    internacoes.Add(new Internacao
+                    {
+                        Id = Guid.NewGuid(),
+                        DataEntrada = dataEntrada,
+                        PrevisaoAlta = previsaoAlta,
+                        MotivoInternacao = motivosInternacao[rand.Next(motivosInternacao.Length)], 
+                        Leito = leitos[rand.Next(leitos.Length)], 
+                        Quarto = quartos[rand.Next(quartos.Length)],
+                        Setor = setores[rand.Next(setores.Length)], 
+                        PlanoSaudeUtilizado = planosSaude[rand.Next(planosSaude.Length)], 
+                        ObservacoesClinicas = "Paciente em observação, apresentar sintomas de " + (rand.Next(2) == 0 ? "dificuldade respiratória" : "fortes dores abdominais") + ".",
+                        StatusInternacao = statusInternacao[rand.Next(statusInternacao.Length)], 
+                        PacienteId = paciente.Id, 
+                        AtendimentoId = atendimento.Id
+                    });
+                }
+
+                context.Internacoes.AddRange(internacoes);
+                context.SaveChanges();
+            }
 
 
 

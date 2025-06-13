@@ -28,13 +28,13 @@
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\HOSPISIM.5wodl6mn4v.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"5wodl6mn4v"},{"Name":"integrity","Value":"sha256-uxNpYr6W\u002Bf2tn2789XFma/pgoF7azP6q8BcRMPuDhGI="},{"Name":"label","Value":"_content/HOSPISIM/HOSPISIM.bundle.scp.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1126"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022uxNpYr6W\u002Bf2tn2789XFma/pgoF7azP6q8BcRMPuDhGI=\u0022"},{"Name":"Last-Modified","Value":"Fri, 13 Jun 2025 04:10:03 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1126"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022uxNpYr6W\u002Bf2tn2789XFma/pgoF7azP6q8BcRMPuDhGI=\u0022"},{"Name":"Last-Modified","Value":"Fri, 13 Jun 2025 05:59:17 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/HOSPISIM/HOSPISIM.bundle.scp.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\HOSPISIM.5wodl6mn4v.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-uxNpYr6W\u002Bf2tn2789XFma/pgoF7azP6q8BcRMPuDhGI="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1126"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022uxNpYr6W\u002Bf2tn2789XFma/pgoF7azP6q8BcRMPuDhGI=\u0022"},{"Name":"Last-Modified","Value":"Fri, 13 Jun 2025 04:10:03 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1126"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022uxNpYr6W\u002Bf2tn2789XFma/pgoF7azP6q8BcRMPuDhGI=\u0022"},{"Name":"Last-Modified","Value":"Fri, 13 Jun 2025 05:59:17 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/HOSPISIM/js/site.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\site.js'))</AssetFile>
