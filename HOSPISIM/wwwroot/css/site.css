@@ -10,6 +10,7 @@ html {
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+
 }
 
 html {
@@ -20,3 +21,44 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+
+
+.botao-link {
+    display: inline-block; /* Para tratar como um botão */
+    background-color: #007bff; /* Cor de fundo do botão */
+    color: white; /* Cor do texto */
+    padding: 8px 15px; /* Espaçamento interno */
+    border-radius: 5px; /* Bordas arredondadas */
+    text-decoration: none; /* Remover o sublinhado */
+    text-align: center; /* Centralizar o texto */
+    font-size: 14px; /* Tamanho da fonte */
+    transition: background-color 0.3s ease; /* Transição suave para mudança de cor */
+    margin-bottom: 10px;
+}
+
+    .botao-link:hover {
+        background-color: #0056b3; /* Cor do fundo ao passar o mouse */
+    }
+
+    .botao-link.header {
+        margin-bottom: 0px;
+    }
+
+    .botao-link.back {
+        margin-top: 10px;
+        margin-bottom: 0px;
+    }
+
+/* Opcional: Alterando a cor para o botão "Delete" */
+.botao-link.delete {
+    background-color: #dc3545; /* Cor vermelha para o botão Delete */
+}
+
+    .botao-link.delete:hover {
+        background-color: #c82333; /* Cor mais escura ao passar o mouse */
+    }
+    
+    .botao-link:last-child {
+        margin-bottom: 0;
+    }

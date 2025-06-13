@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<HOSPISIM.Models.Atendimento>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Atendimento";
 }
 
-<h1>Index</h1>
+<h1>Atendimento</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="botao-link" asp-action="Create">Criar Novo</a>
 </p>
 <table class="table">
     <thead>
@@ -61,9 +61,9 @@
                     @Html.DisplayFor(modelItem => item.ProfissionalDeSaude.NomeCompleto)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a class="botao-link" asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a class="botao-link" asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                <a class="botao-link delete" asp-action="Delete" asp-route-id="@item.Id">Deletar</a>
             </td>
         </tr>
 }
