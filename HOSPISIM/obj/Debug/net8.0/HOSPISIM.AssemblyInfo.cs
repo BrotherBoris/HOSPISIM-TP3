@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HOSPISIM")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d60bb0f93ea026470b7cd9cc089cb4692163a42e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9a73019dc5a3a5bd800c64e322590f75eec36d8c")]
 [assembly: System.Reflection.AssemblyProductAttribute("HOSPISIM")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HOSPISIM")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
