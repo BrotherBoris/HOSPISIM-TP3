@@ -10,7 +10,7 @@ namespace HOSPISIM.Data
             context.Database.EnsureCreated();
             context.Database.Migrate();
 
-
+            context.Exame.RemoveRange(context.Exame);
             context.Prontuario.RemoveRange(context.Prontuario);
             context.Atendimento.RemoveRange(context.Atendimento);
 
@@ -470,9 +470,49 @@ namespace HOSPISIM.Data
                 context.Atendimento.AddRange(atendimentos);
                 context.SaveChanges();
             }
+
+            // SEED: Exame
+            if (!context.Exame.Any())
+            {
+                var atendimentos = context.Atendimento.ToList();
+
+                var tiposDeExame = new[] { "Hemograma", "Raio-X", "Ultrassonografia", "Eletrocardiograma", "Tomografia" };
+                var resultados = new[] { "Normal", "Alterado", "Aguardando Resultado", "Em Análise", "Positivo" };
+
+                var exames = new List<Exame>();
+                var rand = new Random();
+
+                // Gerar de 1 a 3 exames para cada atendimento
+                foreach (var atendimento in atendimentos)
+                {
+                    for (int i = 0; i < rand.Next(1, 4); i++)
+                    {
+                        exames.Add(new Exame
+                        {
+                            Id = Guid.NewGuid(),
+                            Tipo = tiposDeExame[rand.Next(tiposDeExame.Length)], 
+                            DataDeSolicitacao = DateTime.Now.AddDays(-rand.Next(1, 30)), 
+                            DataDeRealizacao = DateTime.Now.AddDays(-rand.Next(1, 30)),
+                            Resultado = resultados[rand.Next(resultados.Length)], 
+                            AtendimentoId = atendimento.Id
+                        });
+                    }
+                }
+
+                context.Exame.AddRange(exames);
+                context.SaveChanges();
+            }
+
+
+
+
+
+
+
+
         }
 
 
 
-        }
+    }
     }

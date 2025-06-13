@@ -16,7 +16,7 @@ namespace HOSPISIM.Data
         public DbSet<ProfissionalDeSaude> ProfissionaisDeSaude { get; set; }
         public DbSet<HOSPISIM.Models.Atendimento> Atendimento { get; set; } = default!;
         public DbSet<HOSPISIM.Models.Prontuario> Prontuario { get; set; } = default!;
-
+        public DbSet<HOSPISIM.Models.Exame> Exame { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -40,5 +40,8 @@ namespace HOSPISIM.Data
                 .HasForeignKey(a => a.ProfissionalDeSaudeId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
+
+        
+
     }
 }
