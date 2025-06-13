@@ -15,8 +15,9 @@ O HOSPISIM-TP3 é baseado em **.NET Core (8)** utilizando o **MVC (Model-View-Co
 
 1. **Clone o repositório**
     ```bash
-     git clone https://github.com/seu-usuario/HOSPISIM-TP3.git
+     git clone https://github.com/BrotherBoris/HOSPISIM-TP3
     ```
+    Utilize a Branch Master
     
 2. **Configuração do banco de dados**
     No SQL Server Manager crie a DataBase
