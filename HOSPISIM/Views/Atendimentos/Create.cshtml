@@ -1,0 +1,96 @@
+﻿@model HOSPISIM.Models.Atendimento
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Atendimento</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DataEHora" class="control-label"></label>
+                <input asp-for="DataEHora" class="form-control" />
+                <span asp-validation-for="DataEHora" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tipo" class="control-label"></label>
+                <input asp-for="Tipo" class="form-control" />
+                <span asp-validation-for="Tipo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <input asp-for="Status" class="form-control" />
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Local" class="control-label"></label>
+                <input asp-for="Local" class="form-control" />
+                <span asp-validation-for="Local" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PacienteId" class="control-label"></label>
+                <select asp-for="PacienteId" class ="form-control" asp-items="ViewBag.PacienteId"></select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ProntuarioId" class="control-label"></label>
+                <select asp-for="ProntuarioId" class="form-control" id="ProntuarioId">
+                    <option value="">Selecione um paciente primeiro</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProfissionalDeSaudeId" class="control-label"></label>
+                <select asp-for="ProfissionalDeSaudeId" class ="form-control" asp-items="ViewBag.ProfissionalDeSaudeId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#PacienteId').change(function () {
+                var pacienteId = $(this).val();
+                $('#ProntuarioId').empty();
+
+                if (pacienteId) {
+                    $.getJSON('/Atendimentos/GetProntuariosPorPaciente', { pacienteId: pacienteId }, function (data) {
+                        $('#ProntuarioId').append($('<option>', {
+                            value: '',
+                            text: 'Selecione um prontuário'
+                        }));
+                        $.each(data, function (index, item) {
+                            $('#ProntuarioId').append($('<option>', {
+                                value: item.value,
+                                text: item.text
+                            }));
+                        });
+                    });
+                } else {
+                    $('#ProntuarioId').append($('<option>', {
+                        value: '',
+                        text: 'Selecione um paciente primeiro'
+                    }));
+                }
+            });
+        });
+    </script>
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
